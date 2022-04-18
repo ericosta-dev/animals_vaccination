@@ -1,0 +1,69 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+    <title>Login</title>
+</head>
+{% block style%}
+<style>
+    body {
+        background-color: #f1faee;
+    }
+
+    .login-card {
+        text-align: center;
+        width: 320px;
+        border-radius: 0.5rem;
+        top: 10;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 150px auto;
+        background-color: #a8dadc;
+        padding: 20px;
+    }
+
+    p {
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
+
+<body>
+    <div class="login-card">
+        <h3>Controle Digital de Vacinação</h3>
+        <hr>
+        <form method="post">
+            {% csrf_token %}
+            {{form.username}}
+            <br>
+            {{form.password}}
+            <br>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary" value="Login">Entrar</button>
+            </div>
+        </form>
+        <hr>
+        <div class="center">
+            <p class="text-muted">Eric Costa - 2022</p>
+        </div>
+    </div>
+</body>
+{% block scripts%}
+<script>
+    document.getElementById("id_username").classList.add("form-control");
+    document.getElementById("id_username").placeholder = "Usuário";
+    document.getElementById("id_password").classList.add("form-control");
+    document.getElementById("id_password").placeholder = "Senha";
+</script>
+{%endblock%}
+
+</html>

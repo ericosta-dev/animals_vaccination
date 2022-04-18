@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<style>
+    #principal {
+        margin-top: 10px;
+        margin-right: 10px;
+    }
+</style>
+<div class="container-fluid" id="principal">
+    <div class="row">
+        <div class="col-12">
+            {% if object %}
+            <h5>Editar Configuração Vacina</h5>
+            {% else %}
+            <h5>Adicionar Configuração Vacina</h5>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form method="post" class="form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="col-12">
+                    <button class="btn btn-primary " type="submit" onclick="this.disabled=true; this.form.submit();">Salvar</button>
+                    <a class="btn btn-danger " type="button" href="{% url 'vaccines-settings-list' %}">Cancelar</a>
+                </div> 
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock%}

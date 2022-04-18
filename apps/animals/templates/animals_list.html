@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<style>
+    #principal{
+        margin-top: 10px;
+    }
+</style>
+<div class="container-fluid" id="principal">
+    <form method="post" class="col-md-11 form">
+        <div class="row">
+
+            {% csrf_token %}
+            <div class="col-2">
+                <h5>Animais</h5>
+            </div>
+            <div class="col-6">
+                <h5 style="margin-right: 10px;">Filtro: {{form}}</h5>
+            </div>
+            <div class="col-2">
+                <button type="submit" class="btn btn-primary">{% trans 'Buscar' %}</button>
+            </div>
+            <div class="col-2">
+                <a class="btn btn-primary " type="button" href="{% url 'animals-add' %}">Adicionar</a>
+            </div>
+        </div>
+    </form>
+    {% if animals %}
+    <div class="row">
+        <table class="table">  
+            <thead>
+                <tr>
+                    <th scope="col"> Id </th>
+                    <th scope="col"> Nome </th>
+                    <th scope="col"> Espécie </th>
+                    <th scope="col"> Ação </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for animal in animals %}
+                <tr>
+                    <th scope="how">{{animal.id}}</th>
+                    <th>{{animal.name}}</th>
+                    <th>{{animal.specie}}</th>
+                    <th>
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <a type="button"  class="btn btn-warning" href="{% url 'animals-edit' pk=animal.id %}" style="margin-right: 3px;">Editar</a>
+                            <button type="button" class="btn btn-danger">Inativar</button>
+                        </div>
+                    </th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>   
+    </div>
+    {% endif%}
+</div>
+{% endblock%}
