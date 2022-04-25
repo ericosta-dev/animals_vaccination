@@ -16,7 +16,6 @@ class AnimalsFilter(forms.Form):
     )
 
 class AnimalForm(forms.ModelForm):
-    specie = forms.ModelChoiceField(label="Espécie",queryset = Specie.objects.filter(active=True),required = True)
 
     class Meta:
         model = Animal
