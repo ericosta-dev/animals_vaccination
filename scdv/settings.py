@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'apps.animals',
     'apps.vaccines',
     'apps.application',
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [
