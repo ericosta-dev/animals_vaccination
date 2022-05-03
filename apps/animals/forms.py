@@ -1,6 +1,5 @@
 from django import forms
 from .models import Specie,Animal
-from django.contrib.auth.models import User
 
 class SpecieForm(forms.ModelForm):
     class Meta:

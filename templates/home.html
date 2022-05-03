@@ -7,18 +7,21 @@
 <div class="container-fluid" id="principal">
   <div class="row">
     <div class="col-9"> Seja bem-vindo(a), {{ user.username }}!</div>
-    
   </div>
   <div class="row">
     <div class="col-3">
-      <a class="btn btn-primary " type="button" href="{% url 'species-list' %}">Vacinar animal</a>
+      {% include "modals/modal_application.html" with application_form=application_form vaccine_form=vaccine_form %}
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_application">
+        Vacinar
+      </button>
     </div>
   </div>
-
+  
 </div>
   <p><a href="{% url 'logout' %}">Log Out</a></p>
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">Log In</a>
 {% endif %}
+
 {% endblock %}

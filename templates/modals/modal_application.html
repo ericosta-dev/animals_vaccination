@@ -1,0 +1,40 @@
+{% load bootstrap5 %}
+<div class="modal fade" id="modal_application" tabindex="-1">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Vacinação</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {% csrf_token %}
+        {% bootstrap_form application_form %}
+
+        <br>
+        <table>
+          <tbody>
+            {{ vaccine_form.subject.errors }}
+            {{ vaccine_form.management_form }}
+            {% for item in vaccine_form %}
+            {{item.id}}
+            <tr>
+              <td> {% bootstrap_field item.vaccine %} </td>
+              <td> {% bootstrap_field item.lot_number %} </td>
+              <td> {% bootstrap_field item.manufacturing_date %} </td>
+              <td> {% bootstrap_field item.due_date %} </td>
+              <td> {% bootstrap_field item.notify_date %} </td>
+              <td> {% bootstrap_field item.notify %} </td>
+              <td> {% if item.instance.pk %}{{ item.DELETE }}{% endif %}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary">Aplicar</button>
+      </div>
+    </div>
+  </div>
+</div>
