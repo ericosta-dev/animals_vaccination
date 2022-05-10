@@ -15,4 +15,6 @@ class DashboardView(ListView):
         ctx['application_form'] = ApplicationForm()
         ctx['vaccine_form'] = VaccineApplicationInlineForm(instance=Application(),
          initial=[{}],form_kwargs={})
+        ctx['applications'] = VaccineApplication.objects.all()
+
         return ctx

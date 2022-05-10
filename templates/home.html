@@ -15,13 +15,22 @@
         Vacinar
       </button>
     </div>
+    <div class="table">
+      {% for application in applications %}
+        {{ application.application.animal}} - {{ application.vaccine}} - {{ application.application.add_date}}
+        <br />
+      {% endfor %}
+    </div>
   </div>
-  
-</div>
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
-{% endif %}
 
+</div>
+<p><a href="{% url 'logout' %}">Log Out</a></p>
+
+
+{% else %}
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">Log In</a>
+{% endif %}
 {% endblock %}
+
+
