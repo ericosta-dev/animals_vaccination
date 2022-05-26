@@ -16,5 +16,5 @@ class VaccineApplication(Activible):
     lot_number = models.CharField(max_length=30,verbose_name='Lote')
     manufacturing_date = models.DateField(verbose_name='Data de Fabricação')
     due_date = models.DateField(verbose_name='Data de Vencimento')
-    notify = models.BooleanField(default=False,verbose_name='Notificação')
+    # notify = models.BooleanField(default=False,verbose_name='Notificação')
     notify_date = models.DateField(verbose_name='Data de Notificação',null=True, blank=True)

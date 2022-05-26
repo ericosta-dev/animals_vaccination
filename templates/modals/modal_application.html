@@ -23,7 +23,6 @@
                 <td> {% bootstrap_field item.manufacturing_date %} </td>
                 <td> {% bootstrap_field item.due_date %} </td>
                 <td> {% bootstrap_field item.notify_date %} </td>
-                <td> {% bootstrap_field item.notify %} </td>
                 <td> {% if item.instance.pk %}{{ item.DELETE }}{% endif %}</td>
               </tr>
               {% endfor %}

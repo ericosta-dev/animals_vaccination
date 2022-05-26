@@ -15,6 +15,17 @@ class DashboardView(ListView):
         ctx['application_form'] = ApplicationForm()
         ctx['vaccine_form'] = VaccineApplicationInlineForm(instance=Application(),
          initial=[{}],form_kwargs={})
-        ctx['applications'] = VaccineApplication.objects.all()
+
+
+        applications = Application.objects.filter(user = self.request.user,active=True).values_list('id', flat=True)	
+
+        animals = applications.order_by('animal__name').distinct('animal__name').values_list('animal__id', flat=True)
+        vaccines = []
+        for animal in animals:
+            vaccines.append(VaccineApplication.objects.filter(active=True,application__animal = animal))
+        # ctx['vaccine_applications'] = VaccineApplication.objects.filter(active=True,application__in = applications)
+
+        # print (vaccines)
+        ctx['vaccines'] = vaccines
 
         return ctx

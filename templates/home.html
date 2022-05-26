@@ -5,25 +5,39 @@
 {% block content %}
 {% if user.is_authenticated %}
 <div class="container-fluid" id="principal">
+  {% include "modals/modal_application.html" with application_form=application_form vaccine_form=vaccine_form %}
   <div class="row">
     <div class="col-9"> Seja bem-vindo(a), {{ user.username }}!</div>
   </div>
-  <div class="row">
-    <div class="col-3">
-      {% include "modals/modal_application.html" with application_form=application_form vaccine_form=vaccine_form %}
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_application">
-        Vacinar
-      </button>
-    </div>
-    <div class="table">
-      {% for application in applications %}
-        {{ application.application.animal}} - {{ application.vaccine}} - {{ application.application.add_date}}
-        <br />
-      {% endfor %}
-    </div>
-  </div>
+  <div class="row row-cols-1 row-cols-md-4 g-4">
+    {% for item in vaccines %}
+      
 
+
+    <div class="col">
+      <div class="card" style=>
+        <div class="card-header">
+          {% for i in item %}
+            {{i.application.animal.name}}
+          {% endfor %}
+          
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Vacinas</h5>
+          {% for application in item %}
+            <p class="card-text">{{ application.vaccine}} </p> 
+            <p class="card-text"><small class="text-muted">{{ application.application.add_date |date:'d-m-y H:i' }}</small></p>
+          {% endfor %}
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_application">
+            Vacinar
+          </button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 </div>
+
 <p><a href="{% url 'logout' %}">Log Out</a></p>
 
 
@@ -32,5 +46,3 @@
 <a href="{% url 'login' %}">Log In</a>
 {% endif %}
 {% endblock %}
-
-
