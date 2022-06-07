@@ -54,7 +54,7 @@ class AnimalsListView(View):
 
         specie = request.POST.get('specie')
         if specie:
-            animals = Animal.objects.filter(specie=specie)
+            animals = Animal.objects.filter(breed__specie=specie)
            
         ctx['animals'] = animals
         return render(request, self.template_name, ctx)

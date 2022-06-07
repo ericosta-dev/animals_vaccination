@@ -4,53 +4,76 @@
 {% load static %}
 
 {% block content %}
-<style>
-    #principal{
-        margin-top: 10px;
-    }
-</style>
 <div class="container-fluid" id="principal">
-    <h3>Animais</h3>
-    <form method="post" class="col-md-11 form">
-        <div class="row titulo">
-            {% csrf_token %}
-            <div class="col-6">
+    <div class="row">
+        <div class="col-5">
+            <h3>Animais</h3>
+        </div>
+    </div>
+
+    <form method="post" class="form">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col">
                 {% bootstrap_field form.specie %}
             </div>
-            <div class="col-2">
-                <button type="submit" class="btn btn-primary">{% trans 'Buscar' %}</button>
+        </div>
+        <div class="row">
+            <div class="col-md-1" style="width: 75px;">
+                <button type="submit" class="btn btn-info">{% trans 'Buscar' %}</button>
             </div>
-            <div class="col-2">
+            <div class="col-md-1">
                 <a class="btn btn-primary " type="button" href="{% url 'animals-add' %}">Adicionar</a>
             </div>
         </div>
     </form>
+    <hr>
+    <br>
     {% if animals %}
     <div class="row ">
-        <table class="table">  
+        <table class="table align-middle mb-0 bg-white">
             <thead>
                 <tr>
-                    <th scope="col"> Nome </th>
-                    <th scope="col"> Raça - Espécie </th>
-                    <th scope="col"> Ação </th>
+                    <th>Nome</th>
+                    <th>Raça</th>
+                    <th>Dt. Nascimento</th>
+                    <th>Ação</th>
                 </tr>
             </thead>
             <tbody>
                 {% for animal in animals %}
                 <tr>
-                    <th>{{animal.name}}</th>
-                    <th>{{animal.breed}}</th>
-                    <th>
-                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                            <a type="button" class="btn btn-warning" href="{% url 'animals-edit' pk=animal.id %}" style="margin-right: 3px;">Editar</a>
-                            <button type="button" class="btn btn-danger">Inativar</button>
+                    <!-- Icon -->
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt=""
+                                style="width: 45px; height: 45px" class="rounded-circle" />
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">{{animal.name}}</p>
+                            </div>
                         </div>
-                    </th>
+                    </td>
+    
+                    <!-- Breed -->
+                    <td>
+                        <p class="fw-normal mb-1"> {{ animal.breed }}</p>
+                    </td>
+    
+                    <!-- Birthdate -->
+                    <td>
+                        <p class="fw-normal mb-1"> {{ animal.birthdate }}</p>
+                    </td>
+    
+                    <!-- Edit -->
+                    <td>
+                        <a type="button" class="btn btn-dark" href="{% url 'animals-edit' pk=animal.id %}"
+                            style="margin-right: 3px;">Editar</a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
-        </table>   
+        </table>    
     </div>
-    {% endif%}
 </div>
+{% endif%}
 {% endblock%}
