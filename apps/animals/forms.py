@@ -13,6 +13,9 @@ class AnimalsFilter(forms.Form):
         queryset=Specie.objects.filter(active=True),
         required = False
     )
+    widgets = {
+        'specie': forms.Select(attrs={'class': 'form-control'})
+    }
 
 class AnimalForm(forms.ModelForm):
 

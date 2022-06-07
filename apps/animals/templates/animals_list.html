@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load bootstrap5 %}
 {% load i18n %}
 {% load static %}
 
@@ -9,15 +10,12 @@
     }
 </style>
 <div class="container-fluid" id="principal">
+    <h3>Animais</h3>
     <form method="post" class="col-md-11 form">
-        <div class="row">
-
+        <div class="row titulo">
             {% csrf_token %}
-            <div class="col-2">
-                <h5>Animais</h5>
-            </div>
             <div class="col-6">
-                <h5 style="margin-right: 10px;">Filtro: {{form}}</h5>
+                {% bootstrap_field form.specie %}
             </div>
             <div class="col-2">
                 <button type="submit" class="btn btn-primary">{% trans 'Buscar' %}</button>
@@ -28,11 +26,10 @@
         </div>
     </form>
     {% if animals %}
-    <div class="row">
+    <div class="row ">
         <table class="table">  
             <thead>
                 <tr>
-                    <th scope="col"> Id </th>
                     <th scope="col"> Nome </th>
                     <th scope="col"> Raça - Espécie </th>
                     <th scope="col"> Ação </th>
@@ -41,12 +38,11 @@
             <tbody>
                 {% for animal in animals %}
                 <tr>
-                    <th scope="how">{{animal.id}}</th>
                     <th>{{animal.name}}</th>
                     <th>{{animal.breed}}</th>
                     <th>
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                            <a type="button"  class="btn btn-warning" href="{% url 'animals-edit' pk=animal.id %}" style="margin-right: 3px;">Editar</a>
+                            <a type="button" class="btn btn-warning" href="{% url 'animals-edit' pk=animal.id %}" style="margin-right: 3px;">Editar</a>
                             <button type="button" class="btn btn-danger">Inativar</button>
                         </div>
                     </th>
