@@ -7,7 +7,7 @@ class Vaccine(Activible):
     name = models.CharField(max_length=30,verbose_name='Nome')
     developer = models.CharField(max_length=30,verbose_name='Fabricante')
     specie = models.ForeignKey(Specie,on_delete=models.PROTECT,verbose_name='Especie')
-    description = models.TextField()
+    description = models.TextField(verbose_name='Descrição')
     dosage = models.CharField(max_length=10,verbose_name='Dosagem')
     def __str__(self):
         return self.name

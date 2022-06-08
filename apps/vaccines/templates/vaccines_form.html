@@ -1,35 +1,52 @@
 {% extends 'base.html' %}
+{% load bootstrap5 %}
 {% load i18n %}
 {% load static %}
 
 {% block content %}
-<style>
-    #principal {
-        margin-top: 10px;
-        margin-right: 10px;
-    }
-</style>
+
 <div class="container-fluid" id="principal">
     <div class="row">
-        <div class="col-12">
+        <div class="col-5">
             {% if object %}
-            <h5>Editar Vacina</h5>
+            <h3>Editar Vacina</h3>
             {% else %}
-            <h5>Adicionar Vacina</h5>
+            <h3>Adicionar Vacina</h3>
             {% endif %}
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <form method="post" class="form">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <div class="col-12">
-                    <button class="btn btn-primary " type="submit" onclick="this.disabled=true; this.form.submit();">Salvar</button>
-                    <a class="btn btn-danger " type="button" href="{% url 'vaccines-list' %}">Cancelar</a>
-                </div> 
-            </form>
+    <hr>
+
+    <form method="post" class="form">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-5">
+                {% bootstrap_field form.name %}
+            </div>
+            <div class="col-md-5">
+                {% bootstrap_field form.developer %}
+            </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-md-5">
+                {% bootstrap_field form.specie %}
+            </div>
+            <div class="col-md-5">
+                {% bootstrap_field form.dosage %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {% bootstrap_field form.description %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary " type="submit"
+                    onclick="this.disabled=true; this.form.submit();">Salvar</button>
+                <a class="btn btn-danger " type="button" href="{% url 'vaccines-list' %}">Cancelar</a>
+            </div>
+        </div>
+    </form>
 </div>
 {% endblock%}
