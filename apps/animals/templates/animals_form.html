@@ -1,42 +1,56 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load static %}
+{% load bootstrap5 %}
+
 
 {% block content %}
-<style>
-    #principal {
-        margin-top: 10px;
-        margin-right: 10px;
-    }
-</style>
+
 <div class="container-fluid" id="principal">
     <div class="row">
-        <div class="col-12">
+        <div class="col-5">
             {% if object %}
-            <h5>Editar Animal</h5>
+            <h3>Editar Animal</h3>
             {% else %}
-            <h5>Adicionar Animal</h5>
+            <h3>Adicionar Animal</h3>
             {% endif %}
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <form method="post" class="form">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <div class="col-12">
-                    <button class="btn btn-primary " type="submit" onclick="this.disabled=true; this.form.submit();">Salvar</button>
-                    <a class="btn btn-danger " type="button" href="{% url 'animals-list' %}">Cancelar</a>
-                </div> 
-            </form>
+    <hr>
+
+    <form method="post" class="form">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-2">
+            {% bootstrap_field form.name %}
+            </div>
+            <div class="col-md-1">
+            {% bootstrap_field form.breed %}
+            </div>
         </div>
-    </div>
+        
+        <div class="row">
+            <div class="col-md-2">
+                {% bootstrap_field form.birthdate %}
+            </div>
+            <div class="col-md-1">
+            {% bootstrap_field form.gender %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary " type="submit"
+                    onclick="this.disabled=true; this.form.submit();">Salvar</button>
+                <a class="btn btn-danger " type="button" href="{% url 'animals-list' %}">Cancelar</a>
+            </div>
+        </div>
+    </form>
 </div>
 
 {% endblock%}
 
 {% block scripts%}
 <script>
-    $('#id_user').val( '{{user}}');
+    $('#id_user').val('{{user}}');
 </script>
 {% endblock%}

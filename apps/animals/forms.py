@@ -1,6 +1,10 @@
 from django import forms
 from .models import Specie,Animal
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+    
 class SpecieForm(forms.ModelForm):
     class Meta:
         model = Specie
@@ -23,5 +27,5 @@ class AnimalForm(forms.ModelForm):
         model = Animal
         exclude = ('id','user')
         widgets = {
-            'birthdate': forms.TextInput(attrs={'placeholder':'', 'class': 'date date-picker'}),
+            'birthdate': DateInput(),
         }
