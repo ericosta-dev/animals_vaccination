@@ -1,19 +1,33 @@
 from re import template
-from django.views.generic import ListView,CreateView,UpdateView
+from django.views.generic import ListView,CreateView,UpdateView,View
 from django.shortcuts import render,redirect
 from django.urls import reverse_lazy
 from .models import Vaccine
-from .forms import VaccineForm
+from .forms import VaccineForm,VaccineFilter
 # Create your views here.
-class VaccinesListView(ListView):
-    model = Vaccine
+class VaccinesListView(View):
     template_name = 'vaccines_list.html'
 
-    def get_context_data(self,**kwargs):
-        ctx = super().get_context_data(**kwargs)
+    def get(self,request):
+        ctx = {}
+        filter = VaccineFilter()
+        ctx['filter'] = filter
         ctx['vaccines'] = Vaccine.objects.filter(active=True)
-        return ctx
 
+        return render(request, self.template_name, ctx)
+
+    def post(self,request):
+        filter = VaccineFilter()
+        ctx = {'filter':filter}
+
+        vaccines = Vaccine.objects.filter(active=True)
+
+        specie = request.POST.get('specie')
+        if specie:
+            vaccines = Vaccine.objects.filter(specie=specie,active=True)
+
+        ctx['vaccines'] = vaccines
+        return render(request, self.template_name, ctx)
 
 class VaccinesAddView(CreateView):
     model = Vaccine
