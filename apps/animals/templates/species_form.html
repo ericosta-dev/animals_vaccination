@@ -1,35 +1,34 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load bootstrap5 %}
 {% load static %}
 
 {% block content %}
-<style>
-    #principal {
-        margin-top: 10px;
-        margin-right: 10px;
-    }
-</style>
 <div class="container-fluid" id="principal">
     <div class="row">
-        <div class="col-12">
+        <div class="col-5">
             {% if object %}
-            <h5>Editar Espécie</h5>
+            <h3>Editar Espécie</h3>
             {% else %}
-            <h5>Adicionar Espécie</h5>
+            <h3>Adicionar Espécie</h3>
             {% endif %}
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <form method="post" class="form">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <div class="col-12">
-                    <button class="btn btn-primary " type="submit" onclick="this.disabled=true; this.form.submit();">Salvar</button>
-                    <a class="btn btn-danger " type="button" href="{% url 'species-list' %}">Cancelar</a>
-                </div> 
-            </form>
+    <hr>
+    <form method="post" class="form">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-2">
+                {% bootstrap_field form.name %}
+            </div> 
         </div>
-    </div>
+        
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary " type="submit" onclick="this.disabled=true; this.form.submit();">Salvar</button>
+                <a class="btn btn-danger " type="button" href="{% url 'species-list' %}">Cancelar</a>
+            </div>
+        </div>
+    </form>
 </div>
 {% endblock%}

@@ -1,50 +1,55 @@
 {% extends 'base.html' %}
+{% load bootstrap5 %}
 {% load i18n %}
 {% load static %}
 
 {% block content %}
-<style>
-    #principal{
-        margin-top: 10px;
-    }
-</style>
 <div class="container-fluid" id="principal">
-    <div class="row titulo">
-        <div class="col-10">
-            <h5>Espécies</h5>
+    <div class="row">
+        <div class="col-5">
+            <h3>Espécies</h3>
         </div>
+    </div>
+    <div class="row">
         <div class="col-2">
             <a class="btn btn-primary " type="button" href="{% url 'species-add'%}" >Adicionar</a>
         </div>
     </div>
     {% if species %}
     <div class="row">
-        <table class="table">  
+        <table class="table align-middle mb-0 bg-white"> 
             <thead>
                 <tr>
-                    <th scope="col"> Id </th>
-                    <th scope="col"> Especie </th>
-                    <th scope="col"> Ativo </th>
-                    <th scope="col"> Ação </th>
+                    <th> Id </th>
+                    <th> Especie </th>
+                    <th> Ativo </th>
+                    <th> Ação </th>
                 </tr>
             </thead>
             <tbody>
                 {% for specie in species %}
                 <tr>
-                    <th scope="how">{{specie.id}}</th>
-                    <th>{{specie.name}}</th>
-                    <th>{{specie.active}}</th>
-                    <th>
-                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                            <a type="button"  class="btn btn-warning" href="{% url 'species-edit' pk=specie.id %}" style="margin-right: 3px;">Editar</a>
-                            <button type="button" class="btn btn-danger">Inativar</button>
-                        </div>
-                    </th>
+                    <td>
+                        <p class="fw-normal mb-1"> {{ specie.id }}</p>
+                    </td>
+
+                    <td>
+                        <p class="fw-normal mb-1"> {{ specie.name }}</p>
+                    </td>
+
+                    <td>
+                        <p class="fw-normal mb-1"> {{ specie.active }}</p>
+                    </td>
+
+                    <td>
+                        <a type="button"  class="btn btn-dark" href="{% url 'species-edit' pk=specie.id %}" 
+                        style="margin-right: 3px;">Editar</a>                        
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>   
     </div>
-    {% endif%}
 </div>
+{% endif%}
 {% endblock%}

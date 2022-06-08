@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Specie(Activible):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30,verbose_name='Nome')
 
     def __str__(self):
         return self.name
