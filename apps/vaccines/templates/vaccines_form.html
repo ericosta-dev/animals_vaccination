@@ -6,17 +6,6 @@
 {% block content %}
 
 <div class="container-fluid" id="principal">
-    <div class="row">
-        <div class="col-5">
-            {% if object %}
-            <h3>Editar Vacina</h3>
-            {% else %}
-            <h3>Adicionar Vacina</h3>
-            {% endif %}
-        </div>
-    </div>
-    <hr>
-
     <form method="post" class="form">
         {% csrf_token %}
         <div class="row">
@@ -49,4 +38,15 @@
         </div>
     </form>
 </div>
+{% block scripts %}
+    {% if object %}
+    <script>
+        $("#name-title").html("Editar Vacina");
+    </script>
+    {% else %}
+    <script>
+        $("#name-title").html("Adicionar Vacina");
+    </script>
+    {% endif %}
+{% endblock %}
 {% endblock%}

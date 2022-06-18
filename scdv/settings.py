@@ -87,7 +87,7 @@ DATABASES = {
         'NAME': 'dbscdv',
         'USER': 'postgres',
         'PASSWORD': '123',
-        'HOST':'192.168.1.5'
+        'HOST':'192.168.1.9'
     }
 }
 

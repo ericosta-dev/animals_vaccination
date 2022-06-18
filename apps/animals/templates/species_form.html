@@ -5,30 +5,32 @@
 
 {% block content %}
 <div class="container-fluid" id="principal">
-    <div class="row">
-        <div class="col-5">
-            {% if object %}
-            <h3>Editar Espécie</h3>
-            {% else %}
-            <h3>Adicionar Espécie</h3>
-            {% endif %}
-        </div>
-    </div>
-    <hr>
     <form method="post" class="form">
         {% csrf_token %}
         <div class="row">
             <div class="col-md-2">
                 {% bootstrap_field form.name %}
-            </div> 
+            </div>
         </div>
-        
+
         <div class="row">
             <div class="col">
-                <button class="btn btn-primary " type="submit" onclick="this.disabled=true; this.form.submit();">Salvar</button>
+                <button class="btn btn-primary " type="submit"
+                    onclick="this.disabled=true; this.form.submit();">Salvar</button>
                 <a class="btn btn-danger " type="button" href="{% url 'species-list' %}">Cancelar</a>
             </div>
         </div>
     </form>
 </div>
+{% block scripts %}
+    {% if object %}
+    <script>
+        $("#name-title").html("Editar Espécie");
+    </script>
+    {% else %}
+    <script>
+        $("#name-title").html("Adicionar Espécie");
+    </script>
+    {% endif%}
+{% endblock %}
 {% endblock%}

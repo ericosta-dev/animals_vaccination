@@ -7,34 +7,23 @@
 {% block content %}
 
 <div class="container-fluid" id="principal">
-    <div class="row">
-        <div class="col-5">
-            {% if object %}
-            <h3>Editar Animal</h3>
-            {% else %}
-            <h3>Adicionar Animal</h3>
-            {% endif %}
-        </div>
-    </div>
-    <hr>
-
     <form method="post" class="form">
         {% csrf_token %}
         <div class="row">
             <div class="col-md-2">
-            {% bootstrap_field form.name %}
+                {% bootstrap_field form.name %}
             </div>
             <div class="col-md-1">
-            {% bootstrap_field form.breed %}
+                {% bootstrap_field form.breed %}
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-md-2">
                 {% bootstrap_field form.birthdate %}
             </div>
             <div class="col-md-1">
-            {% bootstrap_field form.gender %}
+                {% bootstrap_field form.gender %}
             </div>
         </div>
         <div class="row">
@@ -47,10 +36,17 @@
     </form>
 </div>
 
-{% endblock%}
-
 {% block scripts%}
+{% if object %}
 <script>
     $('#id_user').val('{{user}}');
+    $("#name-title").html("Editar Animal");
 </script>
+{% else %}
+<script>
+    $('#id_user').val('{{user}}');
+    $("#name-title").html("Adicionar Animal");
+</script>
+{% endif %}
+{% endblock%}
 {% endblock%}

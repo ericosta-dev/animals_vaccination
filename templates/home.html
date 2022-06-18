@@ -44,4 +44,11 @@
 <p>You are not logged in</p>
 <a href="{% url 'login' %}">Log In</a>
 {% endif %}
+
+{% block scripts %}
+<script>
+    $("#name-title").html("Dashboard");
+</script>
+{% endblock %}
+
 {% endblock %}

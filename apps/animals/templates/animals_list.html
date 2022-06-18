@@ -5,13 +5,6 @@
 
 {% block content %}
 <div class="container-fluid" id="principal">
-    <div class="row">
-        <div class="col-5">
-            <h3>Animais</h3>
-        </div>
-    </div>
-
-    <hr>
     <form method="post" class="form">
         {% csrf_token %}
         <div class="row">
@@ -77,4 +70,9 @@
     </div>
 </div>
 {% endif%}
+{% block scripts%}
+    <script>
+        $("#name-title").html("Animais");
+    </script>
+{% endblock%}
 {% endblock%}
