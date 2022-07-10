@@ -14,7 +14,7 @@ class ApplicationForm(forms.ModelForm):
 class VaccineApplicationForm(forms.ModelForm):
     class Meta:
         model = VaccineApplication
-        exclude = ('id','active')
+        exclude = ('id','active','sent')
         widgets = {
             'manufacturing_date': DateInput(),
             'due_date': DateInput(),

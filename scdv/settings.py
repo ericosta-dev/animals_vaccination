@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'apps.vaccines',
     'apps.application',
     'bootstrap5',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -87,7 +88,7 @@ DATABASES = {
         'NAME': 'dbscdv',
         'USER': 'postgres',
         'PASSWORD': '123',
-        'HOST':'192.168.1.9'
+        'HOST':'192.168.1.7'
     }
 }
 
@@ -141,3 +142,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "login"
+
+# CELERY STUFF
+CELERY_BROKER_URL = 'redis://localhost:6379/1'
+CELERY_BROKER_TRANSPORT = 'redis'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['json', 'application/text']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'America/Recife'
+
+# Bottom of the file
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'erictargino@gmail.com'
+EMAIL_HOST_PASSWORD = 'dmithxyirmfhsotq'

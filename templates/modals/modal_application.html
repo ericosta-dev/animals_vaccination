@@ -17,6 +17,7 @@
               {{ vaccine_form.management_form }}
               {% for item in vaccine_form %}
               {{item.id}}
+              <hr>
               <tr class="inlineform">
                 <td> {% bootstrap_field item.vaccine %} </td>
                 <td> {% bootstrap_field item.lot_number %} </td>
