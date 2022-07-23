@@ -33,13 +33,13 @@
     <!-- Div Nova Vacina -->
 
     <div class="row" style="margin-top: 10px;">
-        <div class="col-6" style="width: 66%; height: 630px; background: #f2f2f2; border-radius: 5px; border: 1px solid;">
+        <div class="col-6" style="width: 66%; height: 730px; background: #f2f2f2; border-radius: 5px; border: 1px solid;">
             <div class="row" style="margin-top: 1%;">
                 <div class="col-10">
                     <h4 style="justify-content: center; margin-top: 1%;" >Histórico (Ultimas 10)</h4>
                 </div>
                 <div class="col-2">
-                    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modal_application">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_application">
                         Vacinar
                     </button>
                 </div>
@@ -50,73 +50,63 @@
                     <tr>
                         <th>Nome</th>
                         <th>Raça</th>
-                        <th>Dt. Nascimento</th>
-                        <th>Ação</th>
+                        <th>Dt. Aplicação</th>
+                        <!-- <th>Ação</th> -->
                     </tr>
                 </thead>
                 <tbody>
+                    {% for application in applications %}
                     <tr>
                         <!-- Icon -->
                         <td>
                             <div class="d-flex align-items-center">
-                                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt=""
+                                <img src="{{ application.animal.photo.url }}" alt=""
                                     style="width: 45px; height: 45px" class="rounded-circle" />
                                 <div class="ms-3">
-                                    <p class="fw-bold mb-1">Romeu</p>
+                                    <p class="fw-bold mb-1">{{application.animal.name}}</p>
                                 </div>
                             </div>
                         </td>
         
                         <!-- Breed -->
                         <td>
-                            <p class="fw-normal mb-1"> Cachorro</p>
+                            <p class="fw-normal mb-1"> {{application.animal.breed}}</p>
                         </td>
         
                         <!-- Birthdate -->
                         <td>
-                            <p class="fw-normal mb-1"> 21/08/2000</p>
+                            <p class="fw-normal mb-1"> {{application.add_date}}</p>
                         </td>
         
-                        <!-- Edit -->
+                        <!-- Edit
                         <td>
                             <a type="button" class="btn btn-dark" href=""
                                 style="margin-right: 3px;">Editar</a>
-                        </td>
+                        </td> -->
                     </tr>
-                    <tr>
-                        <!-- Icon -->
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt=""
-                                    style="width: 45px; height: 45px" class="rounded-circle" />
-                                <div class="ms-3">
-                                    <p class="fw-bold mb-1">Romeu</p>
-                                </div>
-                            </div>
-                        </td>
-        
-                        <!-- Breed -->
-                        <td>
-                            <p class="fw-normal mb-1"> Cachorro</p>
-                        </td>
-        
-                        <!-- Birthdate -->
-                        <td>
-                            <p class="fw-normal mb-1"> 21/08/2000</p>
-                        </td>
-        
-                        <!-- Edit -->
-                        <td>
-                            <a type="button" class="btn btn-dark" href=""
-                                style="margin-right: 3px;">Editar</a>
-                        </td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
-        <div class="col-6" style="width: 25%; height: 200px; background: #DBDBDB; margin-left: 10px; border-radius: 5px; border: 1px solid;">
+        <div class="col-6" style="width: 30%; height: 400px; background: #DBDBDB; margin-left: 10px; border-radius: 5px; border: 1px solid;">
             <h4 style="margin-top: 3%;">Alertas (Próximos 15 dias)</h4>
             <hr>
+            <table class="table align-middle mb-0">
+                <tbody>
+                    {% for next in next_applications %}
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="{{ next.application.animal.photo.url }}" alt=""
+                                    style="width: 45px; height: 45px" class="rounded-circle" />
+                            </div>
+                        </td>
+                        <td> {{next.application.animal}} </td>
+                        <td> {{next.vaccine}} </td>
+                        <td> {{next.notify_date}} </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
         </div>
     </div>
 </div>

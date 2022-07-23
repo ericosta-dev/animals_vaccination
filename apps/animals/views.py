@@ -84,5 +84,7 @@ class AnimalUpdateView(UpdateView):
         return ctx
 
     def form_valid(self,form):
-        animal_form = form.save()
+        animal_form = form.save(commit=False)
+        animal_form.active = True 
+        animal_form.save()
         return redirect(self.success_url)

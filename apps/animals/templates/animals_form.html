@@ -7,7 +7,7 @@
 {% block content %}
 
 <div class="container-fluid" id="principal">
-    <form method="post" class="form">
+    <form method="post" class="form" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row">
             <div class="col-md-2">
@@ -17,7 +17,6 @@
                 {% bootstrap_field form.breed %}
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-2">
                 {% bootstrap_field form.birthdate %}
@@ -25,6 +24,24 @@
             <div class="col-md-1">
                 {% bootstrap_field form.gender %}
             </div>
+        </div>
+        <div class="row">
+            {% if object.photo %}
+            <div class="col-md-3    ">
+                <div class="row">
+                    <img src="{{object.photo.url}}" style="width: 250px; height: 250px;">
+                    <div>
+                        {% bootstrap_field form.photo %}
+                    </div>
+                </div>
+            </div>
+            {% else %}  
+            <div class="col-md-3">
+                <div>
+                    {% bootstrap_field form.photo %}
+                </div>
+            </div>
+            {% endif %}
         </div>
         <div class="row">
             <div class="col">
