@@ -9,9 +9,11 @@ from .forms import VaccineApplicationInlineForm,ApplicationForm
 
 def VaccineApplicationAddView(request):
     if request.method == 'POST':
-        form = ApplicationForm(request.POST)
+        form = ApplicationForm(usuario = request.user)
+        ctx = {}
 
         if form.is_valid():
+            print('entrou')
             application = form.save(commit=False)
             application.user = User.objects.get(pk=request.user.id)
             application.save()
@@ -23,7 +25,6 @@ def VaccineApplicationAddView(request):
             return redirect(reverse_lazy('home'))
         else:
             ctx = {
-                'application_form' : form,
-                'vaccine_form' : form_vaccine
+                'application_form' : form
             }
             return redirect(reverse_lazy('home'),ctx)
